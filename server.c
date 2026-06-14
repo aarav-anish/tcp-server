@@ -35,5 +35,12 @@ int main()
         return -1;
     }
 
+    int queue = 5;
+    if (listen(s, queue))
+    {
+        printf("listen() error");
+        return -1;
+    }
+
     return 0;
 }
