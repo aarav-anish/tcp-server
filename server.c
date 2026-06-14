@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#define PORT 8080
+
 int main()
 {
     int s, c;
@@ -20,6 +22,16 @@ int main()
     if (s < 0)
     {
         printf("Socket() error");
+        return -1;
+    }
+
+    srv.sin_family = AF_INET;
+    srv.sin_addr.s_addr = 0;
+    srv.sin_port = htons(PORT);
+
+    if (bind(s, (struct sockaddr *)&srv, sizeof(srv)))
+    {
+        printf("bind() error");
         return -1;
     }
 
