@@ -13,6 +13,8 @@ int main()
     int s, c;
     socklen_t addrlen;
     struct sockaddr_in srv, cli;
+    char buf[512];
+    char *data;
 
     addrlen = 0;
     memset(&srv, 0, sizeof(srv));
@@ -58,6 +60,13 @@ int main()
         return -1;
     }
     printf("Client connected\n");
+
+    read(c, buf, 512);
+    data = "http:// v1.0";
+    write(c, data, strlen(data));
+
+    close(c);
+    close(s);
 
     return 0;
 }
